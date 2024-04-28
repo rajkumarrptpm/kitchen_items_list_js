@@ -15,10 +15,25 @@ function addKitchenItems(){
     kitchenItemsList.appendChild(li);
     kitchenInput.value="";
     kitchenInput.focus();
-    console.log(li);
-    console.log(data)
+    
+
+    // create trash button
+    let trashBtn = document.createElement('i');
+    trashBtn.classList.add('fas','fa-trash');
+    li.appendChild(trashBtn);
+
 }
+
+// Delete item from the list
+function deleteKitchenItem(event){
+    if (event.target.classList[1] === 'fa-trash'){
+        let item = event.target.parentElement;
+        item.remove();
+    }
+}
+
 
 
 // step 1 :- Add an event listner to the button
 addBtn.addEventListener('click',addKitchenItems);
+kitchenItemsList.addEventListener('click',deleteKitchenItem)
