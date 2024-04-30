@@ -56,6 +56,11 @@ function getLocalStorage(){
     
 }
 
+function updateLocalStorage(){
+    localStorage.setItem("item",JSON.stringify(data));
+}
+
+
 
 // step 2 :- Add kitchen Items
 function addKitchenItems(){
@@ -95,8 +100,16 @@ function deleteKitchenItem(event){
 function editKitchenItem(event){
     if (event.target.classList[1] === 'fa-edit'){
         let editedValue = prompt("update the item ");
-        console.log(event);
-        let item = event.target.parentElement;
+        if (editedValue !== null){
+            let item = event.target.parentElement;
+            let itemIndex = data.indexOf(item.querySelector("span").innerText)
+            if (itemIndex !== -1){
+                data[itemIndex] = editedValue;
+                updateLocalStorage();
+                item.querySelector('span').innerText = editedValue
+            }
+        }
+       
         // event.target.parentElement.firstChild.textContent=editedValue ;
         let spanItem = item.querySelector("span");
         spanItem.innerText = editedValue;
